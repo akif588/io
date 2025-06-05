@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Platformum - Gelişmiş</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <a href="#" class="text-3xl font-bold tracking-tight rounded-lg p-2 hover:bg-white hover:text-blue-600 transition duration-300">
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto p-4 md:p-8 flex items-center justify-center">
+        <section id="passwordSection" class="bg-white rounded-xl shadow-lg p-6 md:p-10 text-center border border-blue-100 max-w-md w-full">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-blue-700 mb-6">
+                Özel Bölüme Giriş
+            </h1>
+            <p class="text-gray-600 mb-6">
+                Devam etmek için lütfen şifrenizi girin.
+            </p>
+            <div class="flex flex-col items-center space-y-4">
+                <input
+                    type="password"
+                    id="passwordInput"
+                    placeholder="Şifreyi girin..."
+                    class="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition duration-200 text-center"
+                />
+                <button
+                    id="submitPasswordBtn"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 w-full"
+                >
+                    Giriş Yap
+                </button>
+                <p id="messageBox" class="text-red-600 font-medium hidden mt-2"></p>
+            </div>
+        </section>
+
+        <section id="hiddenButtonsSection" class="bg-white rounded-xl shadow-lg p-6 md:p-10 text-center border border-green-100 max-w-md w-full hidden">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-green-700 mb-6">
+                Hoş Geldiniz!
+            </h1>
+            <p class="text-gray-600 mb-8">
+                İşte size özel linkler:
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button
+                    onclick="window.open('https://www.yandex.com.tr', '_blank')"
+                    class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50"
+                >
+                    Yandex
+                </button>
+                <button
+                    onclick="window.open('https://www.google.com', '_blank')"
+                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
+                >
+                    Google
+                </button>
+                <button
+                    onclick="window.open('https://www.youtube.com', '_blank')"
+                    class="bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-opacity-50"
+                >
+                    YouTube
+                </button>
+                <button
+                    onclick="window.open('https://www.instagram.com', '_blank')"
+                    class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
+                >
+                    Instagram
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const passwordInput = document.getElementById('passwordInput');
+        const submitPasswordBtn = document.getElementById('submitPasswordBtn');
+        const passwordSection = document.getElementById('passwordSection');
+        const hiddenButtonsSection = document.getElementById('hiddenButtonsSection');
+        const messageBox = document.getElementById('messageBox');
+
+        submitPasswordBtn.addEventListener('click', () => {
+            const enteredPassword = passwordInput.value;
+
+            if (enteredPassword === 'XSS') {
+                passwordSection.classList.add('hidden');
+                hiddenButtonsSection.classList.remove('hidden');
+                messageBox.classList.add('hidden');
+            } else {
+                messageBox.textContent = 'Yanlış şifre! Lütfen tekrar deneyin.';
+                messageBox.classList.remove('hidden');
+                passwordInput.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
+
